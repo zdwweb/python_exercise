@@ -1,5 +1,4 @@
-import sys
-import os
+import sys, os
 import pymysql
 
 
@@ -98,7 +97,8 @@ class ATM:
     def transfer_accounts(self, cstm):
         while True:
             flag = 0
-            confirm = 1 #  默认可以输入金额
+            confirm = 1
+            #  默认可以输入金额
             while True:
                 other_id = input("请输入转账卡号:")
                 cur.execute("select * from cstm_information")
@@ -118,7 +118,7 @@ class ATM:
                         break
                 if flag == 1:
                     break
-            if confirm ==0:
+            if confirm == 0:
                 break
             mn = float(input("请输入转账金额:"))
             if mn > cstm.money:
@@ -157,10 +157,11 @@ class ATM:
         sys.exit(0)
 
     def menu(self, cstm):
-        menu_ifms = '\n 1)余额查询\n2）修改密码\n3）取款\n4）存款\n5)转账\n6) 退出系统\n'
+        menu_ifms = '1)余额查询\n2）修改密码\n3）取款\n4）存款\n5)转账\n6) 退出系统\n'
         while True:
             print(menu_ifms)
             num = int(input("请输入操作序号："))
+            i = os.system('cls')
             if num == 1:
                 self.information(cstm)
             elif num == 2:
@@ -184,6 +185,3 @@ def main():
     password = input("please input password:")
     cstm = Customer(card_id, password)
     ATM().welcome(cstm)
-
-
-main()
